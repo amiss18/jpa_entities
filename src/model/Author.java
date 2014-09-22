@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-
 /**
  *
  * @author armel
@@ -46,7 +45,7 @@ public class Author implements Serializable {
     private List<Book> books;
    
     @Column(nullable = false, length = 50)
-    private String city;
+   private String city;
 
     public Author() {
       books=new ArrayList<>();
@@ -119,6 +118,10 @@ public class Author implements Serializable {
     public void setCity(String city) {
         this.city = city;
     }
+    
+    /*
+    * validation du de la ville
+    */
     
     @PrePersist
     @PreUpdate

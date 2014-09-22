@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package peche.pkg2;
+import beans.BookBean;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -101,19 +102,17 @@ public class Main {
         // Gets an entity manager and a transaction
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("peche-2PU");
         EntityManager em = emf.createEntityManager();
-        
-/*        
-        Query query = em.createQuery("Select b FROM Author b ");
-List<Author> books = query.getResultList();
-for( Author o : books ){
+
+     BookBean bb=new BookBean(); 
+      System.out.println("###########Les auteurs et leurs livres ##############");
+    for( Author o : bb.getAllAuthors() ){
            System.out.println("author = " + o.getFirstname());
            for( Book b : o.getBooks()){
                  System.out.println("\t titre = " + b.getTitle());
            }
 
 }
-*/
-        
+     
 Query q=em.createNamedQuery("findAllBooks");
 List<Book> bk=q.getResultList();
 
@@ -122,13 +121,9 @@ List<Book> bk=q.getResultList();
                   System.out.println("\t prix = " + b.getPrice()+"€");
            }
  
- 
-         
-Query query2=em.createNamedQuery(Book.BOOK_BY_PRICE).setParameter("price", 50d);
-List<Book> books2=query2.getResultList();
 
 System.out.println("\n########## Livres dont le prix est >50 ############");
- for( Book b : books2){
+ for( Book b : bb.findBookByPrice(50d)){
                  System.out.println("titre = " + b.getTitle());
                   System.out.println("\t prix = " + b.getPrice()+"€");
            }
