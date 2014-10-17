@@ -14,6 +14,9 @@ public class ValidationException extends RuntimeException {
     
     
     public ValidationException(String _message ){
-        super( _message );
+           super( _message );
+    
     }
+    
+    
 }

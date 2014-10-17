@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -50,6 +51,7 @@ public class Book implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date dateIns;
    
+    @Transient
     public final static String BOOK_BY_PRICE="book_By_Price";
     // ======================================
     // =            Constructors            =
