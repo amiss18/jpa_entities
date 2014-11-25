@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="125.0" prefWidth="220.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.peche.ModalViewController">
+    <children>
+
+       <Label text="Voulez-vous supprimer?"  layoutX="5.0" layoutY="5.0" />
+       <Label text="id" fx:id="res"   layoutX="5.0" layoutY="19.0"  />
+       <Label text="id" fx:id="row"   layoutX="5.0" layoutY="32.0"  />
+     
+        <HBox id="HBox" alignment="CENTER" minWidth="-1.0" spacing="5.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleOk" prefWidth="90.0" text="OK" />
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#handleCancel" prefWidth="90.0" text="Cancel" />
+      
+        </HBox>
+    </children>
+</AnchorPane>

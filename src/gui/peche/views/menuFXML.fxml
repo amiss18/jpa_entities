@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane prefHeight="600.0" prefWidth="1100.0" xmlns:fx="http://javafx.com/fxml"  fx:controller="gui.peche.MenuController">
+  <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Outils">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Pagination" />
+                  <MenuItem mnemonicParsing="false" text="Alertes" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Client">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleNouveauClient" text="Nouveau" />
+              <MenuItem mnemonicParsing="false" onAction="#handleListerClients" text="Lister" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Espèce">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleCreerEspece" text="Nouveau" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleListerEspece" text="Lister" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Aide">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleFaq" text="Aide" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleListerFaq" text="Faq" />
+               </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

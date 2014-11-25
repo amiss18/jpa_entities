@@ -36,7 +36,8 @@ import javax.persistence.Transient;
 @Table(name="p_peche")
 @NamedQueries({
    @NamedQuery( name=Peche.VERIFIER_QUOTA, query="SELECT  p FROM Peche p WHERE p.autorisation.id=:autorisationId"),
-  @NamedQuery( name=Peche.TOTAL_PECHE, query="SELECT SUM(p.quantite) as totalPeche FROM Peche p WHERE p.autorisation.id=:autorisationId")
+  @NamedQuery( name=Peche.TOTAL_PECHE, query="SELECT SUM(p.quantite) as totalPeche FROM Peche p WHERE p.autorisation.id=:autorisationId"),
+   @NamedQuery( name=Peche.RELEVEE_DU_CLIENT, query="SELECT p FROM Peche p WHERE p.autorisation.id=:autorisationId ORDER BY p.autorisation.dateAutorisation DESC,p.datePeche DESC")
 
 })
 public class Peche implements Serializable {
@@ -52,6 +53,9 @@ public class Peche implements Serializable {
     public final static String TOTAL_PECHE="totalPeche";
      @Transient
     public final static String VERIFIER_QUOTA="verifierQuota";
+     
+       @Transient
+    public final static String RELEVEE_DU_CLIENT="releveDuClient";
     
     //l'entité peche utilise un chargement differé car pas besoin de charger ttes les espèces
  /*   @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
@@ -120,21 +124,10 @@ public class Peche implements Serializable {
     }
 
     
-    
 /*
-    
-    public List<Espece> getEspeces() {
-        return especes;
-    }
-
-    public void setEspeces(List<Espece> especes) {
-        this.especes = especes;
-    }
-    
-     public void addEspece( Espece espece ){
-         this.especes.add(espece);
-     }
-*/
+    public void setId(Long _id ){
+        this.id = _id;
+    }*/
     public Autorisation getAutorisation() {
         return autorisation;
     }

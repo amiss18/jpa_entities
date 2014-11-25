@@ -109,7 +109,9 @@ public class Autorisation implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Autorisation[ id=" + id + " ]";
+        return numero;
+       //  return String.format("%s %s %s", numero,"#", quota);
+       
     }
 
     public void setNumero(String numero) {

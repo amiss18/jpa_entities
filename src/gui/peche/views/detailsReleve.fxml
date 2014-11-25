@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="650.0" stylesheets="@tableCss.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.peche.DetailsReleveController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="-12.0" prefHeight="400.0" prefWidth="672.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="dateReleve" layoutX="326.0" layoutY="132.0" prefHeight="41.0" prefWidth="82.0" />
+            <Label fx:id="typeSociete" layoutX="159.0" layoutY="80.0" prefHeight="30.0" prefWidth="239.0" text="type" />
+            <Label fx:id="releve" layoutX="161.0" layoutY="136.0" prefHeight="32.0" prefWidth="350.0" styleClass="releve" text="Relevé des activités /donne la taille exacte " underline="true" wrapText="true">
+            </Label>
+            <Text fx:id="societe" layoutX="154.0" layoutY="40.0" lineSpacing="1.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="societe" text="Société une grande entréprise de la place" textAlignment="CENTER" wrappingWidth="291.7294921875">
+               
+            </Text>
+       
+            
+              <SplitPane dividerPositions="0.5" layoutX="154.0" layoutY="181.0" prefHeight="350.0" prefWidth="801.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="releveeTable" layoutX="46.0" layoutY="91.0" prefHeight="32.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="dateColumn" prefWidth="150.0" styleClass="table-row-cell" text="Date" />
+                      <TableColumn fx:id="quantiteColumn" prefWidth="250.0" styleClass="table-row-cell" text="Quantité" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="481.0">
+               <children>
+                  <Label fx:id="quantiteLabel" layoutX="27.0" layoutY="104.0" prefHeight="25.0" prefWidth="82.0" text="Quantité :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="quantiteTextField" alignment="CENTER" layoutX="27.0" layoutY="139.0" prefHeight="37.0" prefWidth="198.0" promptText="Quantité">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="erreurEspece" layoutX="27.0" layoutY="140.0" prefHeight="15.0" prefWidth="290.0" />
+                  <AnchorPane layoutX="12.0" layoutY="185.0" prefHeight="51.0" prefWidth="210.0">
+                     <children>
+                        <Button fx:id="btnDeleteReleve" layoutX="109.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleDelete" prefHeight="37.0" prefWidth="91.0" text="Supprimer" />
+                        <Button fx:id="btnSaveReleve" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="37.0" prefWidth="91.0" text="Enregistrer" />
+                     </children>
+                     
+                  </AnchorPane>
+                  <Label layoutX="233.0" layoutY="147.0" prefHeight="15.0" prefWidth="7.0" text="*" textFill="#f80606">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                        <Label layoutX="27.0" layoutY="30.0" prefHeight="15.0" prefWidth="91.0" text="Date Relevé:" />
+                        <DatePicker fx:id="dateRelveLabel" layoutX="27.0" layoutY="62.0" promptText="la date d'activité" />
+                        <Label layoutX="232.0" layoutY="66.0" prefHeight="15.0" prefWidth="7.0" text="*" textFill="#f80606">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="dateErreur" layoutX="118.0" layoutY="30.0" prefHeight="15.0" prefWidth="276.0" textFill="#ee0808">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="quantiteErreur" layoutX="108.0" layoutY="109.0" prefHeight="15.0" prefWidth="284.0" textFill="#f80a0a">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Label>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+            <Separator layoutX="470.0" layoutY="20.0" orientation="VERTICAL" prefHeight="81.0" prefWidth="8.0" />
+            <Text fx:id="contactText" layoutX="543.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="210.0">
+               <font>
+                  <Font size="12.0" />
+               </font></Text>
+            <Label layoutX="478.0" layoutY="18.0" text="Contact:">
+               <font>
+                  <Font size="12.0" />
+               </font></Label>
+            <Label layoutX="478.0" layoutY="46.0" text="Tél:">
+               <font>
+                  <Font size="12.0" />
+               </font></Label>
+            <Label fx:id="telLabel" layoutX="515.0" layoutY="47.0" prefHeight="15.0" prefWidth="298.0" text="00">
+               <font>
+                  <Font size="12.0" />
+               </font></Label>
+            <Label layoutX="480.0" layoutY="70.0" prefHeight="15.0" prefWidth="101.0" text="n° autorisation:">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Text fx:id="numAutorisationText" layoutX="581.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0555" wrappingWidth="232.7294921875">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Text>
+            <Label layoutX="481.0" layoutY="94.0" text="Date autorisation:" />
+            <Label fx:id="dateAutorisationLabel" layoutX="610.0" layoutY="94.0" prefHeight="14.0" prefWidth="101.0" text="Label">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="msgErreur" layoutX="537.0" layoutY="153.0" prefHeight="15.0" prefWidth="369.0" textFill="#f50909">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

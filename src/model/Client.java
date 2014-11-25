@@ -17,9 +17,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -27,6 +30,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table( name="p_client")
+@NamedQueries({
+   @NamedQuery( name=Client.TOUS_LES_CLIENTS, query="SELECT  c FROM Client c ")
+
+})
 public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -52,15 +59,14 @@ public class Client implements Serializable {
             inverseJoinColumns = @JoinColumn( name="type_client_fk")
     )
     private List<TypeClient> typeClients;
-  /*  
-    @OneToMany(cascade=CascadeType.REMOVE)
-    @JoinColumn(name="client_fk", nullable=true)
-    private List<Peche> peches;*/
+  
 
    @OneToOne(mappedBy = "client", cascade=CascadeType.REMOVE)
     private Autorisation autorisation;
 
     
+     @Transient
+        public final static String TOUS_LES_CLIENTS="tousLesClients";
     // ======================================
     // =            Constructors            =
     // ======================================

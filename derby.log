@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Mon Oct 13 17:08:19 CEST 2014:
-Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.10.1.3 - (1557168) : instance a816c00e-0149-0a0d-87d9-0000038602d0 
-dans le répertoire de base de données /home/armel/java/peche-2/peche2DB avec le chargeur de classe sun.misc.Launcher$AppClassLoader@40e464
+Tue Nov 25 13:40:56 CET 2014:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.10.1.3 - (1557168) : instance a816c00e-0149-e6f8-0c46-00000187d7c0 
+dans le répertoire de base de données /home/armel/java/peche-2/peche2DB avec le chargeur de classe sun.misc.Launcher$AppClassLoader@194fa3e
 Chargé de file:/usr/lib/jvm/java-8-oracle/db/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_20-b26
+java.runtime.version=1.8.0_25-b17
 user.dir=/home/armel/java/peche-2
 os.name=Linux
 os.arch=i386

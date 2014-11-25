@@ -17,8 +17,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -26,6 +29,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="p_espece")
+
+@NamedQueries({
+    @NamedQuery( name=Espece.FIND_ALL_ESPECES, query="SELECT e FROM Espece e")
+})
 public class Espece implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -34,7 +41,8 @@ public class Espece implements Serializable {
 
     private Boolean active;
     private String nom; //sert à désactiver l'affichage d'une espèce supprimée
-
+     @Transient
+    public final static String FIND_ALL_ESPECES="findAllEspeces";
 
     public Espece(){
      //  this.peches = new ArrayList<>(); 

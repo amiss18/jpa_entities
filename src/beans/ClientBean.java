@@ -6,6 +6,7 @@
 package beans;
 
 import exceptions.ValidationException;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -236,36 +237,6 @@ public class ClientBean {
         return autorisation;
     }
 
-    /*on crée une tournée de pêche à partir des entities beans Client, Espece, Peche
-     *
-     */
-    //  public Peche creerUneTourneeDePeche(Long clientId, Long especeId, Peche peche ) {
-  /*  public Peche creerUneTourneeDePeche(Long clientId, Long especeId, Peche peche, Long autorisationId) {
-        if (autorisationId == null) {
-            throw new IllegalArgumentException("autorisationId pointe à null!");
-        }
-
-        if (especeId == null) {
-            throw new IllegalArgumentException("especeId pointe à null!");
-        }
-
-        if (peche == null) {
-            throw new IllegalArgumentException("Peche pointe à null!");
-        }
-        Client client = this.getClient(clientId);//on recupère le client
-        Espece espece = this.getEspece(especeId);//on recupère l'espece
-        Autorisation autorisation = this.getAutorisation(autorisationId);
-        
-        client.addPeche(peche);
-        peche.addEspece(espece);
-        peche.setAutorisation(autorisation);
-        tx = em.getTransaction();
-        tx.begin();
-        em.persist(peche);//l'EM persiste peche dans la bd
-        tx.commit();
-        return peche;
-    }
-    */
     
     
       public Peche creerUneTourneeDePeche( Peche peche, Long autorisationId) {
@@ -289,6 +260,26 @@ public class ClientBean {
         return peche;
     }
 
+      public Peche creerUneTourneeDePeche( Long autorisationId, Double quantite, Date dateActivite) {
+      
+    //    Peche peche=this.getPeche(pecheId);
+       Autorisation autorisation = this.getAutorisation(autorisationId);
+        Peche peche=new Peche();
+    
+       
+        tx = em.getTransaction();
+        tx.begin();
+        peche.setAutorisation(autorisation);
+        peche.setDatePeche(dateActivite);
+        peche.setQuantite(quantite);
+        em.persist(peche);//l'EM persiste peche dans la bd
+        tx.commit();
+        return peche;
+    }
+      
+      public Peche creerUneTourneeDePeche( Peche peche){
+        return  creerUneTourneeDePeche(peche.getAutorisation().getId(),peche.getQuantite(), peche.getDatePeche());
+      }
     //------------------------------------//
     // Suppression d'entities beans
     //-----------------------------------//
@@ -404,7 +395,54 @@ public class ClientBean {
         tx.commit();
         return client;
     }
+    
+    /*mise à jour de la quantité pêché, ou de la quantité importé
+    *
+    */
+    
+     public void modifierQuantiteCumulee(Long pecheId, Double quantite, Date date) {
+         tx = em.getTransaction();
+         Peche p=this.getPeche(pecheId);
+        tx.begin();
+      //  p.setId(pecheId);
+       p.setQuantite(quantite);
+        p.setDatePeche(date);
+        em.merge(p);
+        tx.commit(); 
+     }
+     /** modifie la date de la pêche, ou de l'importation
+      * 
+      * @param pecheId
+      * @param date 
+      */
+     public void modifierDatePeche(Long pecheId, Date date) {
+         tx = em.getTransaction();
+         Peche p=this.getPeche(pecheId);
+        tx.begin();
+        p.setDatePeche(date);
+        em.merge(p);
+        tx.commit(); 
+     }
+     
+     
+     
+     /**
+      * 
+      * @param pecheId
+      * @param quantite 
+      */
 
+     public void modifierQuantiteCumulee(Long pecheId, Double quantite) {
+         tx = em.getTransaction();
+         Peche p=this.getPeche(pecheId);
+        tx.begin();
+       p.setQuantite(quantite);
+        em.merge(p);
+        tx.commit(); 
+     }
+     
+     
+     
     /**
      * le total de toutes les quantités pêchées pour une autorisation
      *
@@ -421,7 +459,67 @@ public class ClientBean {
         Double totalPechee = (Double) query.getSingleResult();
         return totalPechee;
     }
+    
+   
+       /**
+     * A-til déjà atteint son quota?false pour non et true pour oui
+     *
+     * @param autorisationId id de l'autorisation
+     * @return Boolean false si le quota n'est pas encore atteint
+     */
+    public boolean quotaAtteint(Long autorisationId ) {
+        if (autorisationId == null) {
+            throw new IllegalArgumentException("autorisationId pointe à null");
+        }
+        
+       
+        Query query;
+        query = em.createNamedQuery(Peche.VERIFIER_QUOTA);
+        query.setParameter("autorisationId", autorisationId);
+        @SuppressWarnings("unchecked")
+        List<Peche> pe=query.getResultList();
+        Double totalPechee=0d, quota=0d;
+        for(Peche p: pe){
+            totalPechee+=p.getQuantite();
+            quota =p.getAutorisation().getQuota();
+        
+        }
+        return totalPechee>=quota;
+    }
 
+     /**
+     * vérifie si la quantité à ajouter depasse son quota prévu
+     * la quantité à ajouter n'est possible que si la méthode renvoie true
+     *
+     * @param autorisationId id de l'autorisation
+     * @return Boolean true si le quota n'est pas encore atteint
+     */  
+    public boolean ajoutPossible(Long autorisationId, Double quantite ) {
+        if (autorisationId == null) {
+            throw new IllegalArgumentException("autorisationId pointe à null");
+        }
+        
+         if (quantite == null) {
+            throw new IllegalArgumentException("quantité non renseignée");
+        }
+        Query query;
+        query = em.createNamedQuery(Peche.VERIFIER_QUOTA);
+        query.setParameter("autorisationId", autorisationId);
+        List<Peche> pe=query.getResultList();
+        Double totalPechee=0d, quota=0d;
+        for(Peche p: pe){
+            totalPechee+=p.getQuantite();
+            quota =p.getAutorisation().getQuota();
+        //System.out.println("quota = " + p.getAutorisation().getQuota() +" q="+totalPechee);
+        
+        }
+       
+        Double quantiteRestante= quota-totalPechee;
+        //true:aj
+        return !(quantiteRestante>0 && quantiteRestante<quantite);
+    }
+    
+    
      /**
      * le total de toutes les quantités pêchées pour une autorisation
      *
@@ -481,6 +579,38 @@ public class ClientBean {
         tx.commit();
         
     }
+    
+    
+    
+    public void modifierEspece( Long especeId , String nom ){
+        if ( especeId == null) {
+            throw new IllegalArgumentException("espece est invalide");
+        }
+        Espece espece = this.getEspece(especeId);
+       
+        tx = em.getTransaction();
+         espece.setId(espece.getId());
+         espece.setNom(nom);
+        tx.begin();
+        em.merge(espece);
+        tx.commit();
+        
+    }
+    
+    
+     @SuppressWarnings("unchecked")
+    public List<Client> findAllCustumers() {
+        List<Client> clients;
+        Query        query = em.createNamedQuery(Client.TOUS_LES_CLIENTS);
+        query.setFirstResult(0)
+                .setMaxResults(100);
+        clients = query.getResultList();
+        
+
+        return clients;
+    }
+    
+     
     
     /*fertmeture de connection
     

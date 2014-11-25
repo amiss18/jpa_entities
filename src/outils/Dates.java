@@ -11,7 +11,11 @@ import java.util.Date;
  * @author armel
  */
 public class Dates {
-    
+
+    /**
+     *
+     */
+    public static final String paternUS="yyyy-MM-dd";
     
     public Dates(){
         
@@ -73,4 +77,33 @@ public class Dates {
         SimpleDateFormat formatFr = new SimpleDateFormat("dd-MM-yyyy");
          return formatFr.format(date);
     }
+       
+ 
+	public static boolean isThisDateValid(String dateToValidate, String dateFromat){
+ 
+		if(dateToValidate == null){
+			return false;
+		}
+ 
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFromat);
+		sdf.setLenient(false);
+ 
+		try {
+ 
+			//if not valid, it will throw ParseException
+			Date date = sdf.parse(dateToValidate);
+			System.out.println(date);
+                        return true;
+ 
+		} catch (ParseException e) {
+ 
+			//e.printStackTrace();
+			//return false;
+		}
+ 
+	return false;
+	}
+ 
+
+       
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0"  stylesheets="@tableCss.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.peche.EspeceViewController">
+   <children>
+      <!-- <Label fx:id="lastNameLabel" styleClass="label-bright" text="Label" />-->
+      <ToolBar layoutX="195.0" layoutY="534.0">
+         <items>
+            <Button layoutX="252.0" layoutY="496.0" mnemonicParsing="false" onAction="#handleAccueil" text="Accueil" />
+         </items>
+      </ToolBar>
+      <SplitPane dividerPositions="0.5" layoutX="154.0" layoutY="91.0" prefHeight="418.0" prefWidth="801.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView  fx:id="especeTable"  layoutX="46.0" layoutY="61.0" prefHeight="416.0" prefWidth="310.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="nom" prefWidth="395.0" text="Poisson" styleClass="table-row-cell" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="395.0" prefWidth="481.0">
+               <children>
+                  <Label layoutX="27.0" layoutY="55.0" prefHeight="25.0" prefWidth="135.0" text="Nom du poisson:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="nomEspece" alignment="CENTER" layoutX="27.0" layoutY="94.0" prefHeight="37.0" prefWidth="290.0" text="Entrer le nom du poisson" >
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </TextField>
+                  <Label fx:id="erreurEspece" layoutX="27.0" layoutY="140.0" prefHeight="15.0" prefWidth="290.0" />
+                  <AnchorPane layoutX="12.0" layoutY="164.0" prefHeight="51.0" prefWidth="210.0">
+                     <children>
+                        <Button fx:id="btnDelete" layoutX="109.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleDeleteEspece" prefHeight="37.0" prefWidth="91.0" text="Supprimer" />
+                        <Button fx:id="btnSaveEspece" layoutX="9.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleSaveEspece" prefHeight="37.0" prefWidth="91.0" text="Enregistrer" />
+                     </children>
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                     <opaqueInsets>
+                        <Insets bottom="5.0" top="5.0" />
+                     </opaqueInsets>
+                  </AnchorPane>
+                  <Label layoutX="324.0" layoutY="105.0" prefHeight="15.0" prefWidth="7.0" text="*" textFill="#f80606">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <ToolBar layoutX="282.0" layoutY="21.07666015625">
+         <items>
+            <Text layoutX="244.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de toutes les espèces de poisson" textAlignment="CENTER" wrappingWidth="363.7294921875">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+         </items>
+      </ToolBar>
+   </children>
+</AnchorPane>
